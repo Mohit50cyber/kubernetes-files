@@ -1,5 +1,5 @@
-kind: Namespace
-apiVersion: v1
-metadata:
- name: nginx
-
+kind: Namespace       # Kubernetes mein Namespace resource create karega
+apiVersion: v1        # Namespace ke liye Kubernetes API version v1 use hota hai
+metadata:             # Namespace ki identification details define karta hai
+ name: nginx          # Namespace ka naam nginx rakhega
+  

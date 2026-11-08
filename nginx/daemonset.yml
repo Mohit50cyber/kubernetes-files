@@ -1,21 +1,22 @@
-kind: DaemonSet
-apiVersion: apps/v1
-metadata:
- name: nginx-daemonset
- namespace: nginx
-spec:
- selector:
-  matchLabels:
-   app: nginx
+kind: DaemonSet           # Kubernetes DaemonSet resource create karega
+apiVersion: apps/v1       # DaemonSet ke liye apps/v1 API version use karega
+metadata:                 # DaemonSet ki identification details define karta hai
+ name: nginx-daemonset    # DaemonSet ka naam nginx-daemonset rakhega
+ namespace: nginx         # DaemonSet ko nginx namespace mein create karega
+spec:                     # DaemonSet ki desired configuration define karta hai
+ selector:                # DaemonSet ke managed Pods identify karne ka rule hai
+  matchLabels:            # Pod labels ke basis par matching karega
+   app: nginx             # app=nginx label wale Pods ko match karega
 
- template:
-  metadata:
-   labels:
-    app: nginx
+ template:                # DaemonSet ke naye Pods ka template define karta hai
+  metadata:               # Naye Pods ki metadata details define karta hai
+   labels:                # Naye Pods ke labels define karta hai
+    app: nginx            # Har naye Pod ko app=nginx label assign karega
 
-  spec:
-   containers:
-   - name: nginx
-     image: nginx:latest
-     ports:
-     - containerPort: 80     
+  spec:                   # Naye Pods ki container configuration define karta hai
+   containers:            # Har Pod ke andar containers ki list define karta hai
+   - name: nginx          # Container ka naam nginx rakhega
+     image: nginx:latest  # Nginx ki latest-tag container image use karega
+     ports:               # Container ke declared ports ki list define karta hai
+     - containerPort: 80  # Container ka port 80 declare karega
+     

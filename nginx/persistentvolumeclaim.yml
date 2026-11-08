@@ -1,0 +1,17 @@
+kind: PersistentVolumeClaim                # Creates a PersistentVolumeClaim resource in Kubernetes
+apiVersion: v1                             # Specifies the Kubernetes API version for PVC
+metadata:                                  # Defines metadata information for the PVC
+ name: local-pvc                           # Assigns the name local-pvc to the claim
+ namespace: nginx                          # Creates the PVC inside the nginx namespace
+spec:                                      # Defines the storage requirements of the claim
+ accessModes:                              # Specifies the required volume access modes
+  - ReadWriteOnce                          # Requests read-write access from a single node
+ resources:                                # Defines the storage resources requested by the PVC
+  requests:                                # Specifies the minimum storage capacity required
+   storage: 1Gi                            # Requests 1 GiB of persistent storage
+ storageClassName: local-storage           # Matches the storage class name of the PV
+ selector:                                 # Filters eligible PersistentVolumes using labels
+  matchLabels:                             # Specifies the labels that must match
+   app: local                              # Matches the PV with label app=local
+ volumeName: local-pv                      # Explicitly requests binding to the local-pv volume
+

@@ -1,22 +1,23 @@
-kind: Deployment
-apiVersion: apps/v1
-metadata:
- name: nginx-deployment
- namespace: nginx
-spec:
- replicas: 2
- selector:
-  matchLabels:
-   app: nginx
+kind: Deployment          # Kubernetes Deployment resource create karega
+apiVersion: apps/v1       # Deployment ke liye apps/v1 API version use karega
+metadata:                 # Deployment ki identification details define karta hai
+ name: nginx-deployment   # Deployment ka naam nginx-deployment rakhega
+ namespace: nginx         # Deployment ko nginx namespace mein create karega
+spec:                     # Deployment ki desired configuration define karta hai
+ replicas: 2              # Deployment ke through 2 Pods maintain karega
+ selector:                # Deployment ke managed Pods identify karne ka rule hai
+  matchLabels:            # Pods ko unke labels ke basis par match karega
+   app: nginx             # app=nginx label wale Pods ko select karega
 
- template:
-  metadata:
-   labels:
-    app: nginx
+ template:                # Deployment ke naye Pods ka template define karta hai
+  metadata:               # Naye Pods ki metadata details define karta hai
+   labels:                # Naye Pods par apply hone wale labels define karta hai
+    app: nginx            # Har naye Pod ko app=nginx label assign karega
 
-  spec:
-   containers:
-   - name: nginx
-     image: nginx:latest
-     ports:
-     - containerPort: 80     
+  spec:                   # Naye Pods ke containers ki configuration define karta hai
+   containers:            # Har Pod ke andar containers ki list define karta hai
+   - name: nginx          # Container ka naam nginx rakhega
+     image: nginx:latest  # Container ke liye Nginx ki latest-tag image use karega
+     ports:               # Container ke declared ports ki list define karta hai
+     - containerPort: 80  # Container ka port 80 declare karega
+   

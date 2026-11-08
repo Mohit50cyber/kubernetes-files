@@ -1,11 +1,12 @@
-kind: Pod
-apiVersion: v1
-metadata:
- name: nginx-pod
- namespace: nginx
-spec:
- containers:
- - name: nginx
-   image: nginx:latest
-   ports:
-   - containerPort: 80  
+kind: Pod                 # Kubernetes mein ek standalone Pod create karega
+apiVersion: v1            # Pod resource ke liye Kubernetes API version v1 hai
+metadata:                 # Pod ki identification details define karta hai
+ name: nginx-pod          # Pod ka naam nginx-pod rakhega
+ namespace: nginx         # Pod ko nginx namespace ke andar create karega
+spec:                     # Pod ki desired configuration define karta hai
+ containers:              # Pod ke andar chalne wale containers ki list hai
+ - name: nginx-pod        # Container ka naam nginx-pod rakhega
+   image: nginx:latest    # Docker Hub se Nginx ki latest-tag wali image use karega
+   ports:                 # Container ke declared network ports ki list hai
+   - containerPort: 80    # Container ka port 80 declare karega, expose nahi karega
+
