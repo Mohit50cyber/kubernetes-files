@@ -1,12 +1,12 @@
-kind: Pod
-apiVersion: v1
-metadata:
- name: apache-pod
- namespace: apache
-spec:
- containers:
- - name: apache
-   image: httpd:latest
-   ports:  
-   - containerPort: 80  
+kind: Pod                        # Creates a standalone Kubernetes Pod
+apiVersion: v1                   # Specifies the API version for Pod
+metadata:                        # Defines the Pod metadata
+ name: apache-pod                # Sets the Pod name to apache-pod
+ namespace: apache               # Creates the Pod inside the apache Namespace
+spec:                            # Defines the desired Pod configuration
+ containers:                     # Defines the list of containers inside the Pod
+ - name: apache-pod              # Sets the container name to apache-pod
+   image: httpd:latest           # Uses the latest-tagged Apache HTTP Server image
+   ports:                        # Defines the container port declarations
+   - containerPort: 80           # Declares port 80 for the Apache container
 

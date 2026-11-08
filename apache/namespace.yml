@@ -1,4 +1,5 @@
-kind: Namespace
-apiVersion: v1
-metadata:
- name: apache  
+kind: Namespace                  # Creates a new Kubernetes Namespace
+apiVersion: v1                   # Specifies the API version for Namespace
+metadata:                        # Defines the Namespace metadata
+ name: apache                    # Sets the Namespace name to apache
+

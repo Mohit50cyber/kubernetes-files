@@ -1,26 +1,23 @@
-apiVersion: apps/v1
-kind: Deployment
+kind: Deployment                 # Creates a Kubernetes Deployment resource
+apiVersion: apps/v1              # Specifies the API version for Deployment
+metadata:                        # Defines the Deployment metadata
+ name: apache-deployment         # Sets the Deployment name to apache-deployment
+ namespace: apache               # Creates the Deployment in the apache Namespace
+spec:                            # Defines the desired Deployment configuration
+ replicas: 2                     # Maintains two Apache Pod replicas
+ selector:                       # Defines how the Deployment selects its Pods
+  matchLabels:                   # Selects Pods based on matching labels
+   app: apache                   # Matches Pods with the app=apache label
 
-metadata:
-  name: apache-deployment
-  namespace: apache
+ template:                       # Defines the template for creating new Pods
+  metadata:                      # Defines the metadata for the Pods
+   labels:                       # Defines labels assigned to the Pods
+    app: apache                  # Assigns the app=apache label to each Pod
 
-spec:
-  replicas: 2
+  spec:                          # Defines the Pod container configuration
+   containers:                   # Defines the list of containers inside each Pod
+   - name: apache                # Sets the container name to apache
+     image: httpd:latest         # Uses the latest-tagged Apache HTTP Server image
+     ports:                      # Defines the container port declarations
+     - containerPort: 80         # Declares container port 80 for HTTP traffic
 
-  selector:
-    matchLabels:
-      app: apache
-
-  template:
-    metadata:
-      labels:
-        app: apache
-
-    spec:
-      containers:
-        - name: apache
-          image: httpd:latest
-          ports:
-            - containerPort: 80
-     

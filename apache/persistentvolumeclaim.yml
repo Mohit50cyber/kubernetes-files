@@ -1,0 +1,17 @@
+kind: PersistentVolumeClaim                # Creates a PersistentVolumeClaim resource
+apiVersion: v1                             # Specifies the API version for PersistentVolumeClaim
+metadata:                                  # Defines the PersistentVolumeClaim metadata
+ name: apache-local-pvc                    # Sets the PVC name to apache-local-pvc
+ namespace: apache                         # Creates the PVC inside the apache Namespace
+spec:                                      # Defines the PVC storage requirements
+ accessModes:                              # Defines the requested volume access modes
+  - ReadWriteOnce                          # Requests read-write access from a single node
+ resources:                                # Defines the resource requirements of the claim
+  requests:                                # Specifies the minimum requested storage capacity
+   storage: 1Gi                            # Requests one GiB of persistent storage
+ storageClassName: local-storage           # Matches the storage class of the Apache PV
+ selector:                                 # Filters eligible PersistentVolumes using labels
+  matchLabels:                             # Defines the labels that must match
+   app: apache-local                       # Matches the PV with the app=apache-local label
+ volumeName: apache-local-pv               # Explicitly requests the apache-local-pv volume
+

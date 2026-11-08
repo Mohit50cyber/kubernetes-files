@@ -1,0 +1,16 @@
+kind: PersistentVolume                    # Creates a PersistentVolume resource in Kubernetes
+apiVersion: v1                            # Specifies the API version for PersistentVolume
+metadata:                                 # Defines the PersistentVolume metadata
+ name: apache-local-pv                    # Sets the PersistentVolume name to apache-local-pv
+ labels:                                  # Defines labels for identifying the volume
+  app: apache-local                       # Assigns the app=apache-local label to the volume
+spec:                                     # Defines the PersistentVolume storage configuration
+ capacity:                                # Specifies the storage capacity of the volume
+  storage: 1Gi                            # Declares one GiB of storage capacity
+ accessModes:                             # Defines supported volume access modes
+  - ReadWriteOnce                         # Allows read-write mounting by a single node
+ persistentVolumeReclaimPolicy: Retain     # Retains underlying storage after the claim is deleted
+ storageClassName: local-storage          # Assigns the storage class name local-storage
+ hostPath:                                # Uses a directory on the Kubernetes node
+  path: /mnt/data                         # Specifies the node directory for storing data
+

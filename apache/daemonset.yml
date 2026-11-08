@@ -1,0 +1,22 @@
+kind: DaemonSet                   # Creates a Kubernetes DaemonSet resource
+apiVersion: apps/v1               # Specifies the API version for DaemonSet
+metadata:                         # Defines the DaemonSet metadata
+ name: apache-daemonset           # Sets the DaemonSet name to apache-daemonset
+ namespace: apache                # Creates the DaemonSet in the apache Namespace
+spec:                             # Defines the desired DaemonSet configuration
+ selector:                        # Defines how the DaemonSet selects its Pods
+  matchLabels:                    # Selects Pods based on matching labels
+   app: apache                    # Matches Pods with the app=apache label
+
+ template:                        # Defines the template for creating new Pods
+  metadata:                       # Defines the metadata for the Pods
+   labels:                        # Defines the labels assigned to the Pods
+    app: apache                   # Assigns the app=apache label to each Pod
+
+  spec:                           # Defines the Pod container configuration
+   containers:                    # Defines the list of containers inside each Pod
+   - name: apache                 # Sets the container name to apache
+     image: httpd:latest          # Uses the latest-tagged Apache HTTP Server image
+     ports:                       # Defines the container port declarations
+     - containerPort: 80          # Declares container port 80 for HTTP traffic
+
