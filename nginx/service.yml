@@ -1,0 +1,15 @@
+kind: Service                         # Kubernetes mein Service resource create karta hai
+apiVersion: v1                        # Service ke liye API version v1 use hota hai
+metadata:                             # Service ki metadata information define karta hai
+  name: nginx-service                 # Service ka naam nginx-service rakhta hai
+  namespace: nginx                    # Service nginx namespace mein create hogi
+spec:                                 # Service ki configuration define karta hai
+  type: NodePort                      # Node ke IP aur port se application access karne deta hai
+  selector:                           # Decide karta hai traffic kin Pods ko bhejna hai
+    app: nginx                        # app=nginx label wale Pods ko select karta hai
+  ports:                              # Service ke networking ports define karta hai
+    - protocol: TCP                   # TCP protocol use karta hai
+      port: 80                        # Service cluster ke andar port 80 par available hogi
+      targetPort: 80                  # Traffic Nginx container ke port 80 par forward hoga
+      nodePort: 30080                 # Node ke port 30080 par Service expose hogi
+

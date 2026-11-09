@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1                  # Ingress API version
+kind: Ingress                                     # Ingress resource create karta hai
+metadata:                                         # Ingress metadata
+  name: nginx-notess-ingress                      # Ingress resource ka naam
+  namespace: nginx                                # Ingress nginx namespace mein create hoga
+  annotations:                                    # Nginx Ingress Controller annotations
+    nginx.ingress.kubernetes.io/use-regex: "true"  # Regex path matching enable karta hai
+    nginx.ingress.kubernetes.io/rewrite-target: /$2 # Matched prefix remove karke remaining path forward karta hai
+spec:                                             # Ingress routing configuration
+  ingressClassName: nginx                         # Nginx Ingress Controller select karta hai
+  rules:                                          # HTTP routing rules
+  - http:                                         # HTTP requests handle karta hai
+      paths:                                      # URL-based routing
+      - path: /nginx(/|$)(.*)                     # /nginx aur uske subpaths match karta hai
+        pathType: ImplementationSpecific          # Regex paths ke liye suitable path type
+        backend:                                  # Nginx backend
+          service:                                # Kubernetes Service
+            name: nginx-service                   # Nginx Service ka naam
+            port:                                 # Service port
+              number: 80                          # Nginx Service port 80
+      - path: /app(/|$)(.*)                       # /app aur uske subpaths match karta hai
+        pathType: ImplementationSpecific          # Regex paths ke liye suitable path type
+        backend:                                  # NotesApp backend
+          service:                                # Kubernetes Service
+            name: notesapp-service                # NotesApp Service ka naam
+            port:                                 # Service port
+              number: 8000                        # NotesApp Service port 8000
+
